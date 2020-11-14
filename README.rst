@@ -1,5 +1,5 @@
-ETG gas price bot
-=================
+ETG telegram gas price bot
+==========================
 Run:
 ----
 1.
