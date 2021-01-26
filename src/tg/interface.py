@@ -1,5 +1,6 @@
 from telegram.ext import Updater, CommandHandler, ConversationHandler, CallbackQueryHandler, MessageHandler
 from telegram.ext.filters import Filters
+from telegram.error import BadRequest
 import tg.texts as texts
 from tg.bot import bot
 from tg.controller import Controller
@@ -84,7 +85,10 @@ def create_notice(update, context):
         callback_query.edit_message_text(text=text)
         return ConversationHandler.END
     else:
-        callback_query.edit_message_text(text=text)
+        try:
+            callback_query.edit_message_text(text=text)
+        except BadRequest:
+            pass
         return CREATE_NOTICE
 
 
