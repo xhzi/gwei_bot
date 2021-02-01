@@ -1,4 +1,4 @@
-start = "Welcome to the gas price notifier bot!\n" \
+start = "Welcome to the gas price notifier bot developed by @NikitaPirate.\n" \
         "Create a notice about the gas price and the bot will send you a message" \
         " when it is less than the set price.\n" \
         "Use /help for instructions"

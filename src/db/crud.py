@@ -1,5 +1,6 @@
-from db.db_connect import User, Notice, session
+from db.db_connect import User, Notice, Interaction, session
 from sqlalchemy.sql import exists
+from datetime import datetime
 
 
 def is_user_exists(tg_id):
@@ -56,4 +57,12 @@ def delete_user(user):
     for notice in get_user_notices(user.tg_id):
         delete_notice(notice.id)
     res = session.query(User).filter(User.id == user.id).delete(synchronize_session=False)
+    session.commit()
+
+
+def create_interaction(tg_id):
+    user = get_user_by_tg_id(tg_id)
+    now = datetime.now()
+    interaction = Interaction(user.id, now)
+    session.add(interaction)
     session.commit()

@@ -9,10 +9,14 @@ class Controller:
         self.gp_data = gp_data
         self.eth_price = eth_price
 
-    def get_gas_price(self):
+    def get_gas_price(self, update):
         gp = self.gp_data
         eth_price = self.eth_price
         text = texts.gp.format(eth_price.data, gp['fastest'], gp['fast'], gp['standard'], gp['slow'])
+        tg_id = update.effective_chat.id
+        if not crud.is_user_exists(tg_id):
+            crud.create_user(tg_id)
+        crud.create_interaction(tg_id)
         return text
 
     def create_notice(self, tg_id, gp, gp_type):

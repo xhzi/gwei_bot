@@ -1,11 +1,14 @@
 from sqlalchemy import create_engine, Column, Integer, ForeignKey, Float, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
-from config import SQLITE3_CONNECT
+from sqlalchemy.types import DateTime
+from config import POSTGRES_CONNECT
 from gasprice.gasPrice import GP_type
 
 
-engine = create_engine(SQLITE3_CONNECT, connect_args={'check_same_thread': False})
+
+#engine = create_engine(SQLITE3_CONNECT, connect_args={'check_same_thread': False})  #sqlite
+engine = create_engine(POSTGRES_CONNECT)
 Base = declarative_base()
 Session = sessionmaker()
 Session.configure(bind=engine)
@@ -43,3 +46,18 @@ class Notice(Base):
 
     def __repr__(self):
         return '<Notice(id-%s user-%s gp-%s type-%s)>' % (self.id, self.user_id, self.gp, self.type)
+
+
+class Interaction(Base):
+    __tablename__ = 'interaction'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(ForeignKey('user.id'))
+    datetime = Column(DateTime)
+    user = relationship(User, primaryjoin=user_id == User.id)
+
+    def __init__(self, user_id, datetime):
+        self.user_id = user_id
+        self.datetime = datetime
+
+    def __repr__(self):
+        return f'<Interaction(id-{self.id}), user-{self.user_id}, datetime-{self.datetime}>'

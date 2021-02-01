@@ -28,7 +28,7 @@ def info(update, context):
 
 
 def gas_price(update, context):
-    text = controller.get_gas_price()
+    text = controller.get_gas_price(update)
     context.bot.send_message(chat_id=update.effective_chat.id, text=text, parse_mode='Markdown', reply_markup=main_menu_keyboard)
 
 
