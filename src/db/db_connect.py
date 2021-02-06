@@ -2,13 +2,12 @@ from sqlalchemy import create_engine, Column, Integer, ForeignKey, Float, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.types import DateTime
-from config import POSTGRES_CONNECT
+from config import SQLITE3_CONNECT
 from gasprice.gasPrice import GP_type
 
 
 
-#engine = create_engine(SQLITE3_CONNECT, connect_args={'check_same_thread': False})  #sqlite
-engine = create_engine(POSTGRES_CONNECT)
+engine = create_engine(SQLITE3_CONNECT, connect_args={'check_same_thread': False})  #sqlite
 Base = declarative_base()
 Session = sessionmaker()
 Session.configure(bind=engine)
