@@ -20,7 +20,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     tg_id = Column(Integer)
-    notices = relationship("Notice")
+    notices = relationship("Notice", back_populates='user', cascade="all, delete")
 
     def __init__(self, tg_id):
         self.tg_id = tg_id
