@@ -12,11 +12,11 @@ https://gitcoin.co/grants/2137/eth-gas-price-telegram-bot
 Please support the project. This is necessary to maintain and develop the service. Any participation, even 1 DAI, is important."""
     sended = 0
     deleted = 0
-    for user in users:
+    for user in users[394:]:
         try:
             send_message(user.tg_id, text)
             sended += 1
-        except (telegram.error.Unauthorized, telegram.error.BadRequest):
+        except (Exception, telegram.error.Unauthorized, telegram.error.BadRequest):
             session.delete(user)
             session.commit()
             deleted += 1
