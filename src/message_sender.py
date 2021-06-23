@@ -16,7 +16,7 @@ Please support the project. This is necessary to maintain and develop the servic
         try:
             send_message(user.tg_id, text)
             sended += 1
-        except (telegram.error.Unauthorized, telegram.error.BadReques):
+        except (telegram.error.Unauthorized, telegram.error.BadRequest):
             session.delete(user)
             session.commit()
             deleted += 1
