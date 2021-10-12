@@ -9,10 +9,9 @@ safe, propose, fast, suggest_base_fee = 'SafeGasPrice', 'ProposeGasPrice',\
                                                               'FastGasPrice', 'suggestBaseFee'
 
 class GP_type(enum.Enum):
-    fastest = 0
-    fast = 1
-    standard = 2
-    slow = 3
+    fast = 0
+    average = 1
+    slow = 2
 
 
 class GP:
