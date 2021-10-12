@@ -5,6 +5,8 @@ from config import TIMEOUT
 
 requests.packages.urllib3.disable_warnings()
 
+safe, propose, fast, suggest_base_fee = 'SafeGasPrice', 'ProposeGasPrice',\
+                                                              'FastGasPrice', 'suggestBaseFee'
 
 class GP_type(enum.Enum):
     fastest = 0
@@ -18,8 +20,12 @@ class GP:
     @staticmethod
     def __get_gp():
 
-        gp_data = requests.get('https://www.gasnow.org/api/v2/gas/price', verify=False).json()['data']['list']
-        gp_data = [round(gp_data[i]['gasPrice'] / 1000000000, 1) for i in range(4)]
+        gp_data = requests.get("https://api.etherscan.io/api?module=gastracker&action=gasoracle",
+                               verify=False).json()["result"]
+        gp_data = {safe: int(gp_data[safe]),
+                   propose: int(gp_data[propose]),
+                   fast: int(gp_data[fast]),
+                   suggest_base_fee: int(float(gp_data[suggest_base_fee]))}
         return gp_data
 
     @staticmethod
