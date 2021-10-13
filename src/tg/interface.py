@@ -32,9 +32,9 @@ def gas_price(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=text, parse_mode='Markdown', reply_markup=main_menu_keyboard)
 
 
-def fastest(update, context):
-    text = controller.create_notice_by_command(update, 'fastest')
-    context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+# def fastest(update, context):
+#     text = controller.create_notice_by_command(update, 'fastest')
+#     context.bot.send_message(chat_id=update.effective_chat.id, text=text)
 
 
 def fast(update, context):
@@ -42,8 +42,8 @@ def fast(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=text)
 
 
-def standard(update, context):
-    text = controller.create_notice_by_command(update, 'standard')
+def average(update, context):
+    text = controller.create_notice_by_command(update, 'average')
     context.bot.send_message(chat_id=update.effective_chat.id, text=text)
 
 
@@ -97,7 +97,7 @@ def create_conversation_handlers():
     create_notice_conversation_handler = ConversationHandler(
         entry_points=[CommandHandler('create_notice', create_notice_command)],
         states={
-            ENTER_GAS_PRICE: [CallbackQueryHandler(enter_gas_price, pattern=r'(fastest|fast|standard|slow)')],
+            ENTER_GAS_PRICE: [CallbackQueryHandler(enter_gas_price, pattern=r'(fast|average|slow)')],
             CREATE_NOTICE: [MessageHandler(Filters.regex(r"(\d+\.\d+|\d+)"), create_notice)]
         },
         allow_reentry=True,
@@ -122,8 +122,8 @@ def create_handlers():
     create_notice_conversation_handler, get_notices_conversation_handler = create_conversation_handlers()
 
     handlers = [CommandHandler('start', start), CommandHandler('help', help), CommandHandler('info', info),
-                CommandHandler('gas_price', gas_price), CommandHandler('fastest', fastest),
-                CommandHandler('fast', fast), CommandHandler('standard', standard), CommandHandler('slow', slow),
+                CommandHandler('gas_price', gas_price),
+                CommandHandler('fast', fast), CommandHandler('average', average), CommandHandler('slow', slow),
                 create_notice_conversation_handler, get_notices_conversation_handler, ]
 
     return handlers

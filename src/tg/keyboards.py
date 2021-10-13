@@ -11,8 +11,8 @@ def create_user_notices_keyboard(notices):
 
 
 create_notice_keyboard = InlineKeyboardMarkup(
-    [[InlineKeyboardButton('fastest', callback_data='fastest'), InlineKeyboardButton('fast', callback_data='fast')],
-     [InlineKeyboardButton('standard', callback_data='standard'), InlineKeyboardButton('slow', callback_data='slow')]])
+    [[InlineKeyboardButton('fast', callback_data='fast')],
+     [InlineKeyboardButton('average', callback_data='average'), InlineKeyboardButton('slow', callback_data='slow')]])
 
 main_menu_keyboard = ReplyKeyboardMarkup([[KeyboardButton('/gas_price')],
                                           [KeyboardButton('/create_notice'), KeyboardButton('/get_notices')]],

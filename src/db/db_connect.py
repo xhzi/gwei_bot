@@ -35,7 +35,7 @@ class Notice(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(ForeignKey('user.id'))
     gp = Column(Float)
-    type = Column(Enum(GP_type), default=GP_type.standard)
+    type = Column(Enum(GP_type), default=GP_type.average)
     user = relationship(User, primaryjoin=user_id == User.id)
 
     def __init__(self, user_id, gp, type):
