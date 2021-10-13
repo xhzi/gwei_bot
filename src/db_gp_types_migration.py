@@ -9,6 +9,7 @@ def migrate():
         if notice.type == GP_type.standard:
             notice.type = GP_type.average
         print(notice)
+        session.commit()
 
 if __name__ == '__main__':
     migrate()
