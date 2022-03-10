@@ -6,6 +6,7 @@ from tg.bot import bot
 from tg.controller import Controller
 from tg.keyboards import main_menu_keyboard, create_notice_keyboard
 import logging
+from telegram import ReplyKeyboardRemove
 
 
 UPDATED_NOTICES_LIST = 0
@@ -13,8 +14,9 @@ ENTER_GAS_PRICE, CREATE_NOTICE = 0, 1
 
 
 def start(update, context):
+    reply_markup = main_menu_keyboard if update['message']['chat']['type'] == 'private' else ReplyKeyboardRemove()
     text = texts.start
-    context.bot.send_message(chat_id=update.effective_chat.id, text=text, reply_markup=main_menu_keyboard)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=text, reply_markup=reply_markup)
 
 
 def help(update, context):
@@ -28,8 +30,9 @@ def info(update, context):
 
 
 def gas_price(update, context):
+    reply_markup = main_menu_keyboard if update['message']['chat']['type'] == 'private' else ReplyKeyboardRemove()
     text = controller.get_gas_price(update)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=text, parse_mode='Markdown', reply_markup=main_menu_keyboard)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=text, parse_mode='Markdown', reply_markup=reply_markup)
 
 
 # def fastest(update, context):
