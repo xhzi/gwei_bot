@@ -1,4 +1,4 @@
-ETG telegram gas price bot
+ETH telegram gas price bot
 ==========================
 Run:
 ----
